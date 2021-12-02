@@ -4,38 +4,18 @@ import readInput
 import kotlin.system.measureTimeMillis
 
 fun main() {
-    fun part1(input: List<String>): Int {
-        var result = 0
-        val data = input.map { it.toInt() }
-        var previous = data[0]
-        data.forEach {
-            if (it > previous) {
-                result++
-            }
-            previous = it
-        }
-        return result
+    fun part1(input: List<Int>): Int {
+        return input.zipWithNext().count { it.second > it.first }
     }
 
-    fun part2(input: List<String>): Int {
-        var result = 0
-        val data = input.map { it.toInt() }
-        var previous = data[0] + data[1] + data[2]
-        for (i in 0..data.size - 1) {
-            if (i + 1 < data.size && i + 2 < data.size) {
-                if (data[i] + data[i + 1] + data[i + 2] > previous) {
-                    result++
-                }
-                previous = data[i] + data[i + 1] + data[i + 2]
-            }
-        }
-        return result
+    fun part2(input: List<Int>): Int {
+        return input.windowed(3).map { it.sum() }.zipWithNext().count { it.second > it.first }
     }
 
-    val testInput = readInput("day1/data_test")
+    val testInput = readInput("day1/data_test").map { it.toInt() }
     check(part1(testInput) == 7)
 
-    val input = readInput("day1/data")
+    val input = readInput("day1/data").map { it.toInt() }
 
     var part1Result: Int
     var part2Result: Int
