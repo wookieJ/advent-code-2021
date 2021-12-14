@@ -21,7 +21,7 @@ tasks {
 }
 
 abstract class NewDay : DefaultTask() {
-    private val lastDay = File("src").listFilesOrdered().filter { it.isDirectory }.map { it.name.substringAfter("day").toInt() }.last()
+    private val lastDay = File("src").listFilesOrdered().filter { it.isDirectory }.maxOf { it.name.substringAfter("day").toInt() }
     private var day: String = ""
     private var recreate: Boolean = false
 
