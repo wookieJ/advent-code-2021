@@ -15,6 +15,8 @@ fun readInputString(name: String) = File("src", "$name.txt").readText()
  */
 fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray())).toString(16)
 
+fun String.startsWithLowerCase() = this.toList().first().isLowerCase()
+
 fun <E> transpose(xs: List<List<E>>): List<List<E>> {
     fun <E> List<E>.head(): E = this.first()
     fun <E> List<E>.tail(): List<E> = this.takeLast(this.size - 1)
